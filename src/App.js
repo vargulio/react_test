@@ -1,30 +1,27 @@
 import React, {Component} from 'react';
 import classes from './App.scss';
 import {connect} from 'react-redux';
+import Login from './components/login/Login';
+import {BrowserRouter , Route, Switch} from 'react-router-dom'
+import CinemaList from './components/cinemaList/cinemaList';
+import Program from './components/program/program';
 
 class App extends Component {
     render() {
         return (
-            <div className={classes.App}>
-                <div>{this.props.counter}</div>
-                <button onClick={this.props.incrementHandler}>Maikati</button>
-            </div>
+            <BrowserRouter>
+                <div className={classes.App}>
+                    <Switch>
+                        <Route path="/" exact render={()=> (<div>HOME PAGE MADARFAKAR</div>)}></Route>
+                        <Route path="/login" exact component={Login}></Route>
+                        <Route path="/cinemas" exact component={CinemaList}></Route>
+                        <Route path="/program/:id" exact component={Program}></Route>
+                    </Switch>
+                </div>
+            </BrowserRouter>
         );
     }
 }
 
-const matchStateToProps = (state) => {
-    return {
-        counter: state.counter
-    }
-};
 
-const matchDispatchToProps = (dispatch) => {
-    return {
-        incrementHandler: () => {
-            dispatch({type: 'INCREMENT_COUNTER'})
-        }
-    }
-};
-
-export default connect(matchStateToProps, matchDispatchToProps)(App);
+export default App;
