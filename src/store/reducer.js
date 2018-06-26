@@ -68,6 +68,14 @@ export default (state = initialState, action) => {
               console.log(newState);
               return newState;
           }
+        case 'RESERVE_PLACE':
+            const movies = [...state.movies];
+            movies[action.payload.movieIndex].availablePlaces--;
+            return {
+                ...state,
+                movies: movies
+            }
+
     }
     return state;
 }
